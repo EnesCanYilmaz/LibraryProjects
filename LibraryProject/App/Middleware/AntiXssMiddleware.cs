@@ -35,6 +35,7 @@ public sealed class AntiXssMiddleware(RequestDelegate next)
         var originalBody = context.Request.Body;
         try
         {
+            
             var content = await ReadRequestBody(context.Request);
 
             if (IsDangerousString(content, out _))
