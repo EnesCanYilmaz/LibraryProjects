@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Kitap Listesi";
+    Layout = "_Layout";
+}
+
+@model List<LibraryProject.Infrastructure.Data.Entities.Book>
+
+<div class="container" id="dynamic_content">
+    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+        <div class="toolbar" id="kt_toolbar">
+            <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                <div class="d-flex align-items-center me-3">
+                    <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Kitap Listesi</h1>
+                    <span class="h-20px border-gray-200 border-start mx-4"></span>
+                </div>
+            </div>
+        </div>
+        <div class="post d-flex flex-column-fluid" id="kt_post">
+            <div id="kt_content_container" class="container">
+                <div class="card">
+                    <div class="card-header border-0 pt-6">
+                        <div class="card-toolbar">
+                            <div class="d-flex justify-content-end" data-kt-subscription-table-toolbar="base">
+                                <a href="/Home/Create" class="btn btn-primary">
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
+                                            <rect fill="#000000" opacity="0.5" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000)" x="4" y="11" width="16" height="2" rx="1"/>
+                                        </svg>
+                                    </span>
+                                    Kitap Ekle
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="userListContainer">
+                        @Html.AntiForgeryToken()
+                        <div class="card-body pt-2">
+                            <div id="kt_referred_users_tab_content" class="tab-content">
+                                <div id="kt_customer_details_invoices_1" class="tab-pane fade show active" role="tabpanel">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-row-dashed fs-6 fw-bolder gs-0 gy-4 p-0 m-0" id="kt_subscriptions_table">
+                                            <caption style="display: none;">Book Information Table</caption>
+                                            <thead>
+                                            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                <th class="min-w-125px"></th>
+                                                <th class="min-w-125px">Kitap Adı</th>
+                                                <th class="min-w-125px">Yazarı</th>
+                                                <th class="min-w-125px">Durum</th>
+                                                <th class="min-w-125px fs-sm-7">Ödünç Alan</th>
+                                                <th class="min-w-125px fs-sm-7">Geri Dönüş Tarihi</th>
+                                                <th class="text-end min-w-70px">İşlemler</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="fs-6 fw-bold text-gray-600" id="userTableBody">
+                                            @foreach (var book in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img style="max-width: 100px; max-height: 125px; display: block; margin: 0 auto;" src="~/images/@book.ImagePath" alt="">
+                                                    </td>
+                                                    <td>
+                                                        <a class="text-gray-800 text-hover-primary mb-1">@book.Name</a>
+
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge badge-light">@book.Writer</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge badge-light">@(book.IsInLibrary ? "Kütüphane" : "Dışarıda")</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="badge badge-light">@book.Borrower</div>
+                                                    </td>
+                                                    <td>
+                                                        @if (@book.ReturnDate != null)
+                                                        {
+                                                            <div class="badge badge-light">@book.ReturnDate.Value.ToString("dd/MM/yyyy")</div>
+                                                        }
+                                                    </td>
+
+                                                    <td class="text-end">
+                                                        @if (book.IsInLibrary)
+                                                        {
+                                                            <button type="button" class="btn btn-primary editBook" data-id="@book.Id">
+                                                                Ödünç ver
+                                                            </button>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="button" class="btn btn-danger deliver" data-id="@book.Id">
+                                                                Teslim et
+                                                            </button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-top: 150px">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kitap Bilgileri</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="bookForm">
+                    <input type="hidden" id="bookId" name="bookId"/>
+                    <div class="mb-3">
+                        <label for="returnDate" class="form-label">Geri Dönüş Tarihi:</label>
+                        <input type="date" class="form-control" id="returnDate" name="returnDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="borrower" class="form-label">Ödünç Alan Kişi:</label>
+                        <input type="text" class="form-control" id="borrower" name="borrower">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveBook">Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>

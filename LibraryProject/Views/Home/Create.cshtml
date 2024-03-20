@@ -1,0 +1,71 @@
+@model LibraryProject.Models.Request.CreateBookRequestModel
+@{
+    ViewData["Title"] = "Kitap Ekle";
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="toolbar" id="kt_toolbar">
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <div class="d-flex align-items-center me-3">
+                <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">Kitap Ekle</h1>
+                <span class="h-20px border-gray-200 border-start mx-4"></span>
+                <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                    <li class="breadcrumb-item text-muted">
+                        <a href="/" class="text-muted text-hover-primary">Ana Sayfa</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-muted">Kitap İşlemleri</li>
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <li class="breadcrumb-item text-dark">Kitap Ekle</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <div id="kt_content_container" class="container">
+            <div class="card mb-5 mb-xl-10">
+                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0">Kitap Ekle</h3>
+                    </div>
+                </div>
+                <div id="kt_account_profile_details" class="collapse show">
+                    <form asp-controller="Home" data-ajax="true" autocomplete="off" asp-action="Create"
+                          data-ajax-begin="onBegin" data-ajax-failure="onFailure"
+                          data-ajax-success="onSuccess" data-ajax-method="Post"
+                          class="form w-100" novalidate="novalidate" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div class="card-body border-top p-9">
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Kitap Adı</label>
+                                <div class="col-lg-8 fv-row">
+                                    <input asp-for="Name" type="text" name="Name" class="form-control form-control-lg form-control-solid" placeholder="Kitap Adı" value=""/>
+                                </div>
+                            </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Yazarı</label>
+                                <div class="col-lg-8 fv-row">
+                                    <input asp-for="Writer" type="text" name="Writer" class="form-control form-control-lg form-control-solid" placeholder="Yazarı" value=""/>
+                                </div>
+                            </div>
+                            <div class="row mb-6">
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Kitap Fotoğrafı</label>
+                                <div class="col-lg-8 fv-row">
+                                    <input asp-for="ImageFile" type="file" name="ImageFile" class="form-control form-control-lg form-control-solid" placeholder="Kitap Fotoğrafı"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                            <a href="/" class="btn btn-primary btn-active-light-primary me-2">İptal</a>
+                            <button type="submit" class="btn btn-success" id="kt_account_profile_details_submit">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
