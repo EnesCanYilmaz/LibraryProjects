@@ -1,7 +1,11 @@
-
-
 namespace LibraryProject.App.Middleware;
 
+/// <summary>
+/// Uygulama için kullanılan HTTP güvenliği ve istisna işleme ortancalarını yapılandırmak için kullanılan genişletme yöntemleri.
+/// </summary>
+/// <remarks>
+/// Uygulama için HTTP güvenliği ayarlarını yapılandırmak ve özel istisna işleme ve yönlendirme ortancalarını eklemek için kullanılır.
+/// </remarks>
 internal static class ApplicationBuilderExtensions
 {
     internal static IApplicationBuilder UseHttpSecurity(this IApplicationBuilder app)

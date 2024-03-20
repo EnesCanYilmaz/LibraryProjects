@@ -1,8 +1,3 @@
-using System.Globalization;
-using Destructurama;
-using Serilog.Events;
-using Serilog.Sinks.MSSqlServer;
-
 namespace LibraryProject.App.Setup;
 
 internal static class HostBuilderExtensions

@@ -1,7 +1,11 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace LibraryProject.Infrastructure.Data.Entities;
-
+/// <summary>
+/// Kütüphane projesinin kitap varlığını temsil eden sınıf.
+/// BaseHistoricEntity sınıfından türetilmiştir.
+/// </summary>
+/// <remarks>
+/// Kitap adı, yazarı, görüntü yolu, ödünç alan kişi, kütüphane içinde olup olmadığı ve dönüş tarihi gibi özelliklere sahiptir.
+/// </remarks>
 public class Book : BaseHistoricEntity
 {
     public string Name { get; init; }

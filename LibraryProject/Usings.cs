@@ -28,4 +28,9 @@ global using LibraryProject.App.Services.File;
 global using LibraryProject.App.Middleware;
 global using LibraryProject.App.Setup;
 global using FluentValidation;
-
+global using System.Text.Json;
+global using System.Globalization;
+global using Destructurama;
+global using Serilog.Events;
+global using Serilog.Sinks.MSSqlServer;
+global using LibraryProject.Infrastructure.Mappers;

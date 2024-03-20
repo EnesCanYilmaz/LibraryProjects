@@ -16,9 +16,7 @@ public class BookManager(IBookRepository bookRepository) : IBookService
     {
         var book = await bookRepository.GetByIdAsync(model.Id);
 
-        book.ReturnDate = model.ReturnDate;
-        book.Borrower = model.Borrower;
-        book.IsInLibrary = model.IsInLibrary;
+        ObjectMapper.Mapper.Map(model, book);
 
         return await bookRepository.UpdateAsync(book);
     }
@@ -26,7 +24,7 @@ public class BookManager(IBookRepository bookRepository) : IBookService
     public async Task<bool> DeliverAsync(int bookId)
     {
         var book = await bookRepository.GetByIdAsync(bookId);
-
+            
         book.Borrower = null;
         book.ReturnDate = null;
         book.IsInLibrary = true;

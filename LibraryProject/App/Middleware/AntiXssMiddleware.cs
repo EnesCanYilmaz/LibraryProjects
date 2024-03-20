@@ -1,5 +1,12 @@
 namespace LibraryProject.App.Middleware;
 
+/// <summary>
+/// XSS saldırılarını önlemek için kullanılan sızdırılmış (sealed) bir ortanca (middleware) sınıfı.
+/// </summary>
+/// <remarks>
+/// Gelen isteklerdeki URL'leri, sorgu dizelerini ve gövde içeriğini kontrol eder.
+/// Potansiyel tehlikeli karakterler içeren istekleri işler ve uygun bir yanıt döndürür.
+/// </remarks>
 public sealed class AntiXssMiddleware(RequestDelegate next)
 {
     public async Task Invoke(HttpContext context)
