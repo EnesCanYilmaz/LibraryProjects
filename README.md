@@ -52,4 +52,22 @@ Yeni bir kitap eklemek için "Kitap Ekle" linkine tıklanır.
 Açılan formda kitabın adı, yazarı, resmi ve durumu (kütüphanede mi yoksa dışarıda mı) girilir.
 Bilgiler girildikten sonra "Ekle" düğmesine basılarak yeni kitap eklenir.
 
-Uygulama içerisindeki hata ve istisnaların takibi için loglama yapılmıştır.
+## Çözümü: 
+Veri Tabanı Tasarımı:
+
+MSSQL kullanarak bir veri tabanı oluşturulmuştur. Bu veri tabanında "Books" ve "LogEvent" adında bir tablo bulunmaktadır. 
+Uygulama Geliştirme:
+
+.NET Core MVC kullanılarak bir web uygulaması geliştirilmiştir. 
+Entity Framework Core kullanılarak veri tabanı işlemleri Repository Design ile gerçekleştirilmiştir.
+Bazı durumlarda MVC bazı durumlarda Ajax kullanılmıştır.
+FluentValidation, Serilog ve AutoMapper ile uygulama desteklenmiştir.
+
+Arayüz Tasarımı:
+HTML5, Bootstrap ve jQuery gibi önyüz araçları kullanılarak kullanıcı dostu bir arayüz tasarlanmıştır.
+Arayüzde kullanıcıların kolaylıkla gezinebileceği, işlemleri hızlıca gerçekleştirebileceği ve bütün hata mesajlarını alabileceği bir yapı oluşturulmuştur.
+
+Güvenlik ve Hata Kontrolleri:
+
+Uygulama içerisinde hata ve istisnaların takibi için loglama yapılmıştır.
+AntiXss ve AntiForgeryToken ile güvenlik arttırılmıştır.
